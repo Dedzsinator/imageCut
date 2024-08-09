@@ -1,15 +1,16 @@
-import os
+from collections import deque, defaultdict
 import sys
 import cv2
+import os
 import numpy as np
-from collections import defaultdict
 
 class Edge:
-    def __init__(self, v, flow, C, rev):
+    def __init__(self, v, flow, C, rev, capacity = 0):
         self.v = v
         self.flow = flow
         self.C = C
         self.rev = rev
+        self.capacity = capacity
 
 class Graph:
     def __init__(self, V):
@@ -21,7 +22,7 @@ class Graph:
         b = Edge(u, 0, 0, len(self.adj[u]))
         self.adj[u].append(a)
         self.adj[v].append(b)
-        
+
     def bfs(self, s, t, parent):
         visited = [False] * self.V
         queue = [s]
@@ -78,7 +79,7 @@ class ImageSegmentation:
     def segment(self, bg_threshold, algo):
         graph, source, sink = self.setup_graph(bg_threshold)
         max_flow = algo(graph, source, sink)
-        
+
         for i in range(self.height):
             for j in range(self.width):
                 node = i * self.width + j

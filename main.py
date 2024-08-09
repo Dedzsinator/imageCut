@@ -6,7 +6,7 @@ import numpy as np
 from segmentation import ImageSegmentation
 from algorithms.ford_fulkerson import ford_fulkerson
 from algorithms.edmonds_karp import edmonds_karp
-from algorithms.boykov_kolmogorov import boykov_kolmogorov
+from algorithms.dinic import dinic
 from algorithms.push_relabel import push_relabel
 
 def measure_performance(algo, image_path):
@@ -56,7 +56,7 @@ def main():
     algorithms = {
         "Ford-Fulkerson": ford_fulkerson,
         "Edmonds-Karp": edmonds_karp,
-        "Boykov-Kolmogorov": boykov_kolmogorov,
+        "Dinic": dinic,
         "Push-Relabel": push_relabel
     }
 
